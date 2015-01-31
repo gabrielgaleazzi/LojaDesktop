@@ -3,18 +3,22 @@
  */
 package com.br.lojadesktop.cadastro.javaBean;
 
+import com.br.lojadesktop.valid.Valid;
+
 /**
  * @author Rafael S. Vieira
  *
  * 
  */
 public class Administrativo {
-	private String Nome,CPF,RG;
-
+	private String Nome;
+	private String CPF;
+	private String RG;
+	
 	public String getNome() {
 		return Nome;
 	}
-
+	
 	public void setNome(String nome) {
 		Nome = nome;
 	}
@@ -24,28 +28,26 @@ public class Administrativo {
 	}
 
 	
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public void setCPF(String cPF) throws Exception {
+		if(CPF==null)
+			throw new Exception("CPF Inválido!");
+		if(!Valid.validCPF(cPF))
+			throw new Exception("CPF Inválido!");
+		else 
+			this.CPF=cPF;
 	}
 
 	public String getRG() {
 		return RG;
 	}
 
-	public void setRG(String rG) {
-		RG = rG;
-	}
-
-	
-	public String toString() {
-		return "Administrativo [Nome=" + Nome + ", CPF=" + CPF + ", RG=" + RG
-				+ "]";
-	}
-
-	public Administrativo(String nome, String cPF, String rG) {
-		Nome = nome;
-		CPF = cPF;
-		RG = rG;
+	public void setRG(String rG)throws Exception {
+		if(rG==null)
+			throw new Exception("RG inválido");
+		if(!Valid.validRG(rG))
+			throw new Exception("RG inválido");
+		else
+			this.RG = rG;
 	}
 
 	public int hashCode() {
@@ -56,7 +58,7 @@ public class Administrativo {
 		result = prime * result + ((RG == null) ? 0 : RG.hashCode());
 		return result;
 	}
-	
+
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -82,6 +84,16 @@ public class Administrativo {
 			return false;
 		return true;
 	}
-	
-	
+
+	public String toString() {
+		return "Administrativo [Nome=" + Nome + ", CPF=" + CPF + ", RG=" + RG
+				+ "]";
+	}
+
+	public Administrativo(String nome, String cPF, String rG)throws Exception {
+		setNome(nome);
+		setCPF(cPF);
+		setRG(rG);
+	}
+   	
 }
