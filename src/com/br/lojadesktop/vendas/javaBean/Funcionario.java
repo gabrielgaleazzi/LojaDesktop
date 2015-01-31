@@ -4,7 +4,7 @@
 package com.br.lojadesktop.vendas.javaBean;
 
 /**
- * @author gabrielgaleazzi <--- BOIOLAO
+ * @author gabrielgaleazzi
  *
  */
 public class Funcionario {
