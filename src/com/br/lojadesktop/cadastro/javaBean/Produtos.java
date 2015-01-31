@@ -3,6 +3,8 @@
  */
 package com.br.lojadesktop.cadastro.javaBean;
 import java.math.BigDecimal;
+
+import com.br.lojadesktop.valid.Valid;
 /**
  * @author Rafael S. Vieira
  *
@@ -13,8 +15,7 @@ public class Produtos {
 	private String Nome;
 	private String Tipo;
 	private String descricao;
-	private BigDecimal valor = new BigDecimal("0.00");//http://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
-	//criar imagem
+	private BigDecimal valor;
 	
 	public int getIdProduto() {
 		return idProduto;
@@ -27,6 +28,15 @@ public class Produtos {
 	}
 	public void setNome(String nome) {
 		Nome = nome;
+	}
+	public Produtos(int idProduto, String nome, String tipo, String descricao,
+			BigDecimal valor) {
+		super();
+		this.idProduto = idProduto;
+		Nome = nome;
+		Tipo = tipo;
+		this.descricao = descricao;
+		this.valor = valor;
 	}
 	public String getTipo() {
 		return Tipo;
@@ -47,8 +57,9 @@ public class Produtos {
 	}
 	
 	public void setValor(BigDecimal valor) throws Exception {
-		if(valor.signum()<=0)
-			throw new Exception("Valor Inválido");
+	if(!Valid.validValor(valor))
+		throw new Exception("Valor invalido");
+	
 		this.valor = valor;
 	} 
 	
