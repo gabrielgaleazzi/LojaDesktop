@@ -97,7 +97,7 @@ public class Valid {
 	}
 	public static boolean validRG(String rg)
 	{
-		return rg.length()==11?true:false;
+		return rg.length()>7?true:false;
 	}
 	public static boolean validSenha(String senha)
 	{
@@ -109,11 +109,11 @@ public class Valid {
 	}
 	public static boolean validTelefone(String telefone)
 	{
-		return telefone.length()==14?true:telefone.length()==15?true:false;
+		return telefone.length()==13 || telefone.length()==14?true:false;
 	}
 	public static boolean validValor(BigDecimal valor)
 	{
-		return valor.signum()<=0?false:true;
+		return valor.signum()<0?false:true;
 		
 	}
 }

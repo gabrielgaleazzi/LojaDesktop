@@ -29,11 +29,10 @@ public class Administrativo {
 
 	
 	public void setCPF(String cPF) throws Exception {
-		if(CPF==null)
-			throw new Exception("CPF Inválido!");
+		
 		if(!Valid.validCPF(cPF))
 			throw new Exception("CPF Inválido!");
-		else 
+	
 			this.CPF=cPF;
 	}
 

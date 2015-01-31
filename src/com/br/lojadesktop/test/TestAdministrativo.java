@@ -14,7 +14,7 @@ import com.br.lojadesktop.cadastro.javaBean.Administrativo;
  */
 public class TestAdministrativo extends TestCase {
 	public void testConstAdministrativo() throws Exception{
-		Administrativo adm= new Administrativo("Rafael","407.690.558-00","36.695.189-0");
+		Administrativo adm= new Administrativo("Rafael","41954438818","366951890");
 
 	}
 }

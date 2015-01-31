@@ -31,5 +31,6 @@ public class ClienteFisico extends Cliente {
 	private String cpf;
 	private String rg;
 	
+	public ClienteFisico(){}
 	
 }
