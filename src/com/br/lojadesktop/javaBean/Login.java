@@ -32,10 +32,10 @@ public class Login {
 	public void setTipo(char tipo) {
 		this.tipo=tipo;
 	}
-	public Login(String login, String senha, char tipo) {
+	public Login(String login, String senha, char tipo) throws Exception {
 		super();
-		this.login = login;
-		this.senha = senha;
+		this.setLogin(login);
+		this.setSenha(senha);
 		this.tipo = tipo;
 	}
 	private String login;

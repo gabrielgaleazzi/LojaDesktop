@@ -17,7 +17,7 @@ public class Funcionarios extends Administrativo{
 		return login;
 	}
 
-	public void setLogin(String login,String senha) {
+	public void setLogin(String login,String senha) throws Exception {
 		this.login = new Login(login,senha,'F');
 	}
 

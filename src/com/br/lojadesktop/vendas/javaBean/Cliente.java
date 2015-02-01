@@ -22,7 +22,7 @@ public class Cliente {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	public void setLogin(String usuario, String senha) {
+	public void setLogin(String usuario, String senha) throws Exception {
 		this.login = new Login(usuario,senha,'C');
 	}
 
