@@ -1,3 +1,4 @@
+//falta imagem
 /**
  * 
  */
@@ -17,7 +18,7 @@ public class Produtos {
 	private String Tipo;
 	private String descricao;
 	private BigDecimal valor;
-	
+
 	public int getIdProduto() {
 		return idProduto;
 	}

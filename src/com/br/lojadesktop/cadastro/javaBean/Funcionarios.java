@@ -2,7 +2,6 @@
  * 
  */
 package com.br.lojadesktop.cadastro.javaBean;
-
 import com.br.lojadesktop.javaBean.Login;
 
 /**
@@ -23,10 +22,7 @@ public class Funcionarios extends Administrativo{
 	}
 
 	public Funcionarios(String nome, String cPF, String rG,String login, String senha) throws Exception {
-		super();
-		this.setNome(nome);
-		this.setCPF(cPF);
-		this.setRG(rG);
+		super(nome,cPF,rG);
 		this.login= new Login(login,senha,'F');
 	}
 

@@ -17,7 +17,7 @@ public class TestValid extends TestCase {
 
 	public void testValidCPF()
 	{
-		System.out.println("VALID CPF"+Valid.validCPF("41954438818"));
+		System.out.println("VALID CPF"+Valid.validCPF("4195443809818"));
 	}
 	public void testValidRG()
 	{

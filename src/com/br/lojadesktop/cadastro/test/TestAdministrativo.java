@@ -13,12 +13,12 @@ import junit.framework.TestCase;
  */
 public class TestAdministrativo extends TestCase {
 
-		public void TestAdm()
+		public void testAdm()
 		{
 			
 			try {
-				Administrativo adm = new Administrativo("Rafael","41954438818","41954438818","r@r.com","123456");
-				adm.toString();
+				Administrativo adm = new Administrativo("Rafael","4076905580","36695190");
+				System.out.println(adm.toString());
 			} 
 			catch (Exception e) {
 				e.printStackTrace();
