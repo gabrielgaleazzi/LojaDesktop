@@ -4,9 +4,7 @@
 package com.br.lojadesktop.vendas.javaBean;
 
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
-
 
 import com.br.lojadesktop.cadastro.javaBean.Produtos;
 
@@ -35,6 +33,14 @@ public class Carrinho {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	public Carrinho(ArrayList<Produtos> produtos, Cliente cliente,
+			BigDecimal valor) {
+		super();
+		this.produtos = produtos;
+		this.cliente = cliente;
+		this.valor = valor;
+	}
+	public Carrinho() {}
 	public BigDecimal getValor() {
 		return valor;
 	}
@@ -57,6 +63,8 @@ public class Carrinho {
 		java.text.DecimalFormat df = new java.text.DecimalFormat( "#,##0.00" ); 
 		return "R$ "+df.format(this.valor);
 	}
+
+	
 	
 	
 }

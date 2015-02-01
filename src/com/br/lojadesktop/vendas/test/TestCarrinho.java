@@ -41,17 +41,17 @@ public class TestCarrinho extends TestCase {
 			Produtos produto1 = 
 			new Produtos(0,"Bola","Futebol",
 			"Bola de Futebol da Nike",
-			new BigDecimal(1300.75));
+			new BigDecimal(99.90));
 			Produtos produto2 =
 			new Produtos(0,"Camisa","Futebol",
 			"Camisa de Futebol da Nike",
-			new BigDecimal(1500));
+			new BigDecimal(150));
 			ArrayList<Produtos> lista = new ArrayList<Produtos>();
 			lista.add(produto1);
 			lista.add(produto2);
 			carrinho.setProdutos(lista);
 			carrinho.setCliente(cliente);
-			System.out.println(carrinho.getValorReal());
+			System.out.println(carrinho.toString());
 			
 			
 		} catch (Exception e) {

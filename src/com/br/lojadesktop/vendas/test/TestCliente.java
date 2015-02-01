@@ -8,11 +8,8 @@ package com.br.lojadesktop.vendas.test;
 
 
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 
-import com.br.lojadesktop.cadastro.javaBean.Produtos;
-import com.br.lojadesktop.vendas.javaBean.Carrinho;
+
 import com.br.lojadesktop.vendas.javaBean.Cliente;
 import com.br.lojadesktop.vendas.javaBean.ClienteFisico;
 import com.br.lojadesktop.vendas.javaBean.ClienteJuridico;
