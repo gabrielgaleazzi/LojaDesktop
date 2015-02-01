@@ -3,6 +3,10 @@
  */
 package com.br.lojadesktop.vendas.javaBean;
 
+
+
+import javax.persistence.*;
+
 import com.br.lojadesktop.javaBean.Login;
 import com.br.lojadesktop.valid.Valid;
 
@@ -10,33 +14,41 @@ import com.br.lojadesktop.valid.Valid;
  * @author gabrielgaleazzi
  *
  */
+
+@Entity
+@Table(name = "Cliente")
+@SequenceGenerator(name = "CLIENTE_SEQUENCE", sequenceName = "CLIENTE_SEQUENCE", allocationSize = 1, initialValue = 0)
 public class Cliente {
 
-	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "CLIENTE_SEQUENCE")
+	private int id;
+	@Column
+	private String nome;
+	@Column
+	private String sobrenome;
+	@Column
+	private String cep;
+	@Column
+	private String complemento;
+	@Column
+	private String celular;
+	@Column
+	private String telefone;
 
+	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
+	private Login login;
+	
 	public Login getLogin() {
 		return login;
 	}
-	
-	
 	public void setLogin(Login login) {
 		this.login = login;
 	}
 	public void setLogin(String usuario, String senha) throws Exception {
 		this.login = new Login(usuario,senha,'C');
-	}
-
-	private int id;
-	private String nome;
-	private String sobrenome;
-	private String cep;
-	private String complemento;
-	private String celular;
-	private String telefone;
-	private Login login;
-	
-	
-	
+	}	
 	public int getId() {
 		return id;
 	}
@@ -75,7 +87,6 @@ public class Cliente {
 		this.celular=celular;
 		
 	}
-	
 	public String getTelefone() {
 		return telefone;
 	}
@@ -83,8 +94,6 @@ public class Cliente {
 		if(!Valid.validTelefone(telefone)) throw new Exception("Telefone invalido");
 		this.telefone=telefone;
 	}
-	
-	
 	public Cliente(int id, String nome, String sobrenome, String cep,
 			String complemento, String celular, String telefone, String login, String senha) throws Exception {
 		super();
@@ -102,6 +111,4 @@ public class Cliente {
 	{
 		
 	}
-	
-	
-}
+}	

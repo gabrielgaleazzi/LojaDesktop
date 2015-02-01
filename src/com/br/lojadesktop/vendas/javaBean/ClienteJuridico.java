@@ -3,14 +3,24 @@
  */
 package com.br.lojadesktop.vendas.javaBean;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import com.br.lojadesktop.valid.Valid;
 
 /**
  * @author gabrielgaleazzi
  *
  */
+
+
 public class ClienteJuridico extends Cliente {
 
+	@Column(unique = true)
+	private String cnpj;
+	
+	
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -34,7 +44,7 @@ public class ClienteJuridico extends Cliente {
 	{
 		setCnpj(cnpj);
 	}
-	private String cnpj;
+	
 	@Override
 	public String toString() {
 		return "ClienteJuridico [cnpj=" + cnpj + ", getLogin()=" + getLogin()

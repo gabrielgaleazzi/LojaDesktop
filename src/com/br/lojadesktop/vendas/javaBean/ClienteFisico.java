@@ -3,14 +3,27 @@
  */
 package com.br.lojadesktop.vendas.javaBean;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import com.br.lojadesktop.valid.Valid;
 
 /**
  * @author gabrielgaleazzi
  *
  */
+
+
+
+
 public class ClienteFisico extends Cliente {
 
+	
+	private String cpf;
+	private String rg;
+	
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -35,8 +48,7 @@ public class ClienteFisico extends Cliente {
 			throw new Exception("RG invalido");
 		this.rg=rg;
 	}
-	private String cpf;
-	private String rg;
+	
 	
 	public ClienteFisico(){}
 	

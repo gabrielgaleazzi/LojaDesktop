@@ -3,6 +3,8 @@
  */
 package com.br.lojadesktop.javaBean;
 
+import javax.persistence.*;
+
 import com.br.lojadesktop.valid.Valid;
 
 
@@ -10,15 +12,35 @@ import com.br.lojadesktop.valid.Valid;
  * @author gabrielgaleazzi
  *
  */
+@Entity
+@Table(name="Login")
+@SequenceGenerator(name="LOGIN_SEQUENCE", sequenceName="LOGIN_SEQUENCE", allocationSize=1, initialValue=0)
 public class Login {
 
-	public String getLogin() {
-		return login;
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="LOGIN_SEQUENCE")
+	private int id;
+	@Column
+	private String user;
+	@Column
+	private String senha;	
+	public int getId() {
+		return id;
 	}
-	public void setLogin(String login) throws Exception {
-		if(!Valid.validLogin(login)) throw new Exception("Login invalido, precisa ser email");
-		this.login = login;
+	public void setId(int id) {
+		this.id = id;
 	}
+	private char tipo;
+
+
+	public String getuser() {
+		return user;
+	}
+	public void setuser(String user) throws Exception {
+		if(!Valid.validLogin(user)) throw new Exception("user invalido, precisa ser email");
+		this.user = user;
+	}
+	
 	public String getSenha() {
 		return senha;
 	}
@@ -32,15 +54,13 @@ public class Login {
 	public void setTipo(char tipo) {
 		this.tipo=tipo;
 	}
-	public Login(String login, String senha, char tipo) throws Exception {
+	public Login(String user, String senha, char tipo) throws Exception {
 		super();
-		this.setLogin(login);
+		this.setuser(user);
 		this.setSenha(senha);
 		this.tipo = tipo;
 	}
-	private String login;
-	private String senha;	
-	private char tipo;
+	
 	
 	
 	

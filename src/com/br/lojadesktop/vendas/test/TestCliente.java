@@ -30,7 +30,7 @@ public class TestCliente extends TestCase {
 			cliente.setTelefone("(16)3322-0504");
 			cliente.setComplemento("Ap. 123");
 			cliente.setId(0);
-			cliente.setLogin("gg.com","g306090");
+			cliente.setLogin("g@g.com","205080");
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
 			

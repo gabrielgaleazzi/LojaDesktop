@@ -28,7 +28,7 @@ public class Funcionarios extends Administrativo{
 
 	public String toString() {
 		return "Funcionarios [Nome=" + getNome() + ", CPF="
-				+ getCPF() + ", RG=" + getRG() + "Login=" + login.getLogin() +", Senha="
+				+ getCPF() + ", RG=" + getRG() + "Login=" + login.getuser() +", Senha="
 				+login.getSenha()+ "]";
 	}
 	
