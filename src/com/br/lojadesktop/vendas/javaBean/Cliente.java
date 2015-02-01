@@ -17,6 +17,8 @@ public class Cliente {
 	public Login getLogin() {
 		return login;
 	}
+	
+	
 	public void setLogin(Login login) {
 		this.login = login;
 	}

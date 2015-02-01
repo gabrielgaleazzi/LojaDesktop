@@ -15,7 +15,6 @@ import com.br.lojadesktop.cadastro.javaBean.Produtos;
 import com.br.lojadesktop.vendas.javaBean.Carrinho;
 import com.br.lojadesktop.vendas.javaBean.Cliente;
 import com.br.lojadesktop.vendas.javaBean.ClienteFisico;
-import com.br.lojadesktop.vendas.javaBean.ClienteJuridico;
 
 import junit.framework.TestCase;
 
@@ -23,12 +22,14 @@ import junit.framework.TestCase;
  * @author gabrielgaleazzi
  *
  */
-public class TestCliente extends TestCase {
-
-	public void testClienteFisico() 
+public class TestCarrinho extends TestCase {
+	public void testNovoCarrinho() 
 	{
+		
 		try {
-			Cliente cliente = new ClienteFisico("41954438818","41954438818");
+			
+			Cliente cliente;
+			cliente = new ClienteFisico("41954438818","41954438818");
 			cliente.setCelular("(16)99777-7974");
 			cliente.setTelefone("(16)3322-0504");
 			cliente.setComplemento("Ap. 123");
@@ -36,20 +37,37 @@ public class TestCliente extends TestCase {
 			cliente.setLogin("g@g.com","g306090");
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
+			Carrinho carrinho = new Carrinho();
+			Produtos produto1 = 
+			new Produtos(0,"Bola","Futebol",
+			"Bola de Futebol da Nike",
+			new BigDecimal(1300.75));
+			Produtos produto2 =
+			new Produtos(0,"Camisa","Futebol",
+			"Camisa de Futebol da Nike",
+			new BigDecimal(1500));
+			ArrayList<Produtos> lista = new ArrayList<Produtos>();
+			lista.add(produto1);
+			lista.add(produto2);
+			carrinho.setProdutos(lista);
+			carrinho.setCliente(cliente);
+			System.out.println(carrinho.getValorReal());
 			
-			System.out.println(cliente.toString());
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
 	}
 	
-	public void testClienteJuridico() 
+	public void testNovoCarrinho1() 
 	{
+		
 		try {
-			Cliente cliente = new ClienteJuridico("27133699000114");
+			
+			Cliente cliente;
+			cliente = new ClienteFisico("41954438818","41954438818");
 			cliente.setCelular("(16)99777-7974");
 			cliente.setTelefone("(16)3322-0504");
 			cliente.setComplemento("Ap. 123");
@@ -57,17 +75,23 @@ public class TestCliente extends TestCase {
 			cliente.setLogin("g@g.com","g306090");
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
+			Carrinho carrinho = new Carrinho();
+			ArrayList<Produtos> lista = new ArrayList<Produtos>();
+			carrinho.setProdutos(lista);
+			carrinho.setCliente(cliente);
+			System.out.println(carrinho.getValorReal());
 			
-			System.out.println(cliente.toString());
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
 	}
-	
 	
 	
 	
 }
+
+
+

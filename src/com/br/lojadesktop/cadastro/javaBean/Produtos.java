@@ -4,6 +4,7 @@
 package com.br.lojadesktop.cadastro.javaBean;
 import java.math.BigDecimal;
 
+
 import com.br.lojadesktop.valid.Valid;
 /**
  * @author Rafael S. Vieira
@@ -30,13 +31,13 @@ public class Produtos {
 		Nome = nome;
 	}
 	public Produtos(int idProduto, String nome, String tipo, String descricao,
-			BigDecimal valor) {
+			BigDecimal valor) throws Exception {
 		super();
 		this.idProduto = idProduto;
 		Nome = nome;
 		Tipo = tipo;
 		this.descricao = descricao;
-		this.valor = valor;
+		setValor(valor);
 	}
 	public String getTipo() {
 		return Tipo;
@@ -51,11 +52,21 @@ public class Produtos {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public BigDecimal getValor()  {
+	public String getValorReal()  {
 		
-		return valor;
+		java.text.DecimalFormat df = new java.text.DecimalFormat( "#,##0.00" ); 
+		return "R$ "+df.format(this.valor);
 	}
-	
+	public BigDecimal getValor()  {
+			
+		return this.valor;
+		}
+	@Override
+	public String toString() {
+		return "Produtos [idProduto=" + idProduto + ", Nome=" + Nome
+				+ ", Tipo=" + Tipo + ", descricao=" + descricao + ", valor="
+				+ valor + "]";
+	}
 	public void setValor(BigDecimal valor) throws Exception {
 	if(!Valid.validValor(valor))
 		throw new Exception("Valor invalido");
