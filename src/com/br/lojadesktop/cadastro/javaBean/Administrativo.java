@@ -3,6 +3,7 @@
  */
 package com.br.lojadesktop.cadastro.javaBean;
 
+import com.br.lojadesktop.javaBean.Login;
 import com.br.lojadesktop.valid.Valid;
 
 /**
@@ -14,7 +15,17 @@ public class Administrativo {
 	private String Nome;
 	private String CPF;
 	private String RG;
+	private Login login;
 	
+	
+	public Login getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login, String senha ) {
+		this.login = new Login(login,senha,'A');
+	}
+
 	public String getNome() {
 		return Nome;
 	}
@@ -41,8 +52,6 @@ public class Administrativo {
 	}
 
 	public void setRG(String rG)throws Exception {
-		if(rG==null)
-			throw new Exception("RG inválido");
 		if(!Valid.validRG(rG))
 			throw new Exception("RG inválido");
 		else
@@ -86,13 +95,16 @@ public class Administrativo {
 
 	public String toString() {
 		return "Administrativo [Nome=" + Nome + ", CPF=" + CPF + ", RG=" + RG
-				+ "]";
+				+ ", Login= "+login.getLogin()+", Senha="+login.getSenha()+"]";
 	}
 
-	public Administrativo(String nome, String cPF, String rG)throws Exception {
+	public Administrativo(String nome, String cPF, String rG,String login,String senha)throws Exception {
 		setNome(nome);
 		setCPF(cPF);
 		setRG(rG);
+		this.login=new Login(login,senha,'A');
 	}
-   	
+	public Administrativo() {
+		
+	}
 }
