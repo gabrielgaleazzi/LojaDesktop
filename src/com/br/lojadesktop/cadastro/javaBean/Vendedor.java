@@ -9,7 +9,7 @@ import com.br.lojadesktop.javaBean.Login;
  *
  * 
  */
-public class Funcionarios extends Administrativo{
+public class Vendedor extends Administrativo{
 	
 	private Login login;
 	
@@ -21,7 +21,7 @@ public class Funcionarios extends Administrativo{
 		this.login = new Login(login,senha,'F');
 	}
 
-	public Funcionarios(String nome, String cPF, String rG,String login, String senha) throws Exception {
+	public Vendedor(String nome, String cPF, String rG,String login, String senha) throws Exception {
 		super(nome,cPF,rG);
 		this.login= new Login(login,senha,'F');
 	}
