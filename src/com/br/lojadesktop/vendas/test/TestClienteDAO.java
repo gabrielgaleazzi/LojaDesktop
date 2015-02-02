@@ -38,7 +38,7 @@ public class TestClienteDAO extends TestCase{
 			cliente.setSobrenome("Galeazzi");
 			cliente.setCep("48788978");
 			
-			dao.NovoCliente(cliente);
+			dao.NewCliente(cliente);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -60,7 +60,7 @@ public class TestClienteDAO extends TestCase{
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
 			cliente.setCep("48788978");
-			dao.NovoCliente(cliente);
+			dao.NewCliente(cliente);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

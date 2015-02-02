@@ -25,7 +25,7 @@ public class ClienteDAO {
 				Persistence.createEntityManagerFactory("loja");
 		 private final EntityManager em = factory.createEntityManager();
 		
-		 public void NovoCliente(Cliente cliente)
+		 public void NewCliente(Cliente cliente)
 		 {
 			    em.getTransaction().begin();
 				em.persist(cliente);
@@ -34,27 +34,29 @@ public class ClienteDAO {
 		 public void DeletaCliente(Cliente cliente)
 		 {
 			if(cliente.getClass()==ClienteJuridico.class)
-				DeletaJuridico((ClienteJuridico) cliente);
+				DeleteJuridico((ClienteJuridico) cliente);
 			else
-				DeletaFisico((ClienteFisico) cliente);
+				DeleteFisico((ClienteFisico) cliente);
 			
 		 }
-		 private void DeletaJuridico(ClienteJuridico cliente)
+		 private void DeleteJuridico(ClienteJuridico cliente)
 		 {
 			 em.getTransaction().begin();
 			 em.createQuery("delete from Cliente where cnpj = :cnpj ").setParameter("cnpj", cliente.getCnpj()).executeUpdate();
 			 em.createQuery("delete from Login where user= :user ").setParameter("user",cliente.getLogin().getuser()).executeUpdate();
 			 em.getTransaction().commit(); 
 		 }
-		 private void DeletaFisico(ClienteFisico cliente)
+		 private void DeleteFisico(ClienteFisico cliente)
 		 {
 			 em.getTransaction().begin();
 			 em.createQuery("delete from Cliente where cpf = :cpf ").setParameter("cpf", cliente.getCpf()).executeUpdate();
 			 em.createQuery("delete from Login where user= :user ").setParameter("user",cliente.getLogin().getuser()).executeUpdate();
 			 em.getTransaction().commit(); 
 		 }
-		 public void AlteraCliente(Cliente atual,Cliente diferente)
+		 public void AlteraCliente(Cliente alterado)
 		 {
+			 
+			 
 			 
 		 }
 		 public List<?> ListarClientes()
