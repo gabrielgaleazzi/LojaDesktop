@@ -13,8 +13,14 @@ import junit.framework.TestCase;
  * 
  */
 public class TestBD extends TestCase {
-	public void testBD(){
-		System.out.println(BD.statusConection());
+	public void testBD() throws Exception{
+		BD bd = new BD ("com.mysql.jdbc.Driver",
+		           "jdbc:mysql://localhost/loja",
+		           "root", "Rafa9074");
+		
+		//bd.execComando(cmdSQL);
+		//bd.execConsulta(qrySQL)
+		bd.fecharConexao();
 
 	}
 }

@@ -1,68 +1,85 @@
-/**
- * 
- */
 package com.br.lojadesktop.ConexaoBanco;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-/**
- * 
- * @author Rafael S. Vieira
- *
- * 
- */
-public class BD {
-	public static String status = "Não conectou...";	
+import java.sql.*;
 
-	public BD(){
-	
-	}
-	
-	public static java.sql.Connection getConexaoMySQL() {
-	try{
-		Connection connection = null;
-		String driverName ="com.mysql.jdbc.Driver"; 
-		Class.forName(driverName);
-		String url = "jdbc:mysql://localhost/loja";
-		String username = "root";
-		String password = "Rafa9074";
-		 connection = DriverManager.getConnection(url, username, password);
-		 //<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-		 //<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/loja" /> 
-		 //<property name="javax.persistence.jdbc.user" value="root" /> 
-		 //<property name="javax.persistence.jdbc.password" value="Rafa9074" />
-		 if(connection!=null)
-			 status=("STATUS--> Conectado com sucesso!");
-			 
-		 else
-			 status=("STATUS--> Não foi possivel realizar conexão");
-		 
-		 return connection;
-	}
-	
-	catch(ClassNotFoundException e)
-	{
-		System.out.println("O driver expecificado nao foi encontrado.");
-		return null;
-	}
-	catch(SQLException e)
-	{
-		System.out.println("Nao foi possivel conectar ao Banco de Dados."); 
-		return null;
-		}
-	}
-	
-	public static String statusConection() {
-		return status;
-	}
-	public static boolean FecharConexao() {
-		try{
-			BD.getConexaoMySQL().close();
-			return true;
-		}
-		catch(SQLException e){
-			return false;
-		}
-	}
-	
+public class BD
+{
+    private Connection conexao;
+    private Statement  comando;
+
+    public BD (String drv, String url,
+               String username, String senha) throws Exception
+    {
+        try
+        {
+            Class.forName (drv);
+        }
+        catch (ClassNotFoundException e)
+        {
+            throw new Exception ("driver " +e);
+        }
+
+        try
+        {
+            conexao = DriverManager.getConnection (url, username, senha);
+        }
+        catch (SQLException e)
+        {
+            throw new Exception ("conexao "+e);
+        }
+
+        try
+        {
+            comando = conexao.createStatement
+                     (ResultSet.TYPE_SCROLL_INSENSITIVE,
+                      ResultSet.CONCUR_READ_ONLY);
+        }
+        catch (SQLException e)
+        {
+            throw new Exception ("comando "+e);
+        }
+    }
+
+    public void execComando (String cmdSQL) throws Exception
+    {
+        try
+        {
+            this.comando.executeUpdate (cmdSQL);
+        }
+        catch (SQLException e)
+        {
+            throw new Exception ("execucao comando "+e);
+        }
+    }
+
+    public ResultSet execConsulta (String qrySQL) throws Exception
+    {
+        ResultSet resultado = null;
+
+        try
+        {
+            resultado = this.comando.executeQuery (qrySQL);
+        }
+        catch (SQLException e)
+        {
+            throw new Exception ("execucao consulta "+e);
+        }
+
+        return resultado;
+    }
+
+    public void fecharConexao () throws Exception
+    {
+        try
+        {
+            this.comando.close ();
+            this.comando = null;
+
+            this.conexao.close ();
+            this.conexao = null;
+        }
+        catch (SQLException e)
+        {
+            throw new Exception ("fechamento "+e);
+        }
+    }
 }
