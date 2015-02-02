@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"> 
 <persistence-unit name="loja">
-<provider>org.hibernate.ejb.HibernatePersistence</provider> 
+<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> 
 <class>entities.Cliente</class>
 <properties>
 <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
@@ -11,6 +11,6 @@
 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/loja" /> 
 <property name="javax.persistence.jdbc.user" value="root" /> 
-<property name="javax.persistence.jdbc.password" value="Rafa9074" />
 <property name="javax.persistence.jdbc.password" value="306090" />
 </properties> </persistence-unit> </persistence>
+

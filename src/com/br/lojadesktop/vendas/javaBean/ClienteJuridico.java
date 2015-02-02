@@ -14,10 +14,11 @@ import com.br.lojadesktop.valid.Valid;
  *
  */
 
-
+@Entity
+@DiscriminatorValue(value = "CJ")
 public class ClienteJuridico extends Cliente {
 
-	@Column(unique = true)
+	
 	private String cnpj;
 	
 	

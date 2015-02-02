@@ -18,6 +18,8 @@ import com.br.lojadesktop.valid.Valid;
 @Entity
 @Table(name = "Cliente")
 @SequenceGenerator(name = "CLIENTE_SEQUENCE", sequenceName = "CLIENTE_SEQUENCE", allocationSize = 1, initialValue = 0)
+@DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("C")
 public class Cliente {
 
 	@Id
