@@ -4,7 +4,11 @@
 package com.br.lojadesktop.vendas.test;
 
 
+import java.util.List;
+
 import junit.framework.TestCase;
+
+
 
 
 
@@ -20,6 +24,7 @@ import com.br.lojadesktop.vendas.javaBean.ClienteJuridico;
  */
 public class TestClienteDAO extends TestCase{
 
+	ClienteDAO dao = new ClienteDAO();
 	public void testClienteFisico() 
 	{
 		try {
@@ -32,7 +37,7 @@ public class TestClienteDAO extends TestCase{
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
 			cliente.setCep("48788978");
-			ClienteDAO dao = new ClienteDAO();
+			
 			dao.NovoCliente(cliente);
 			
 		} catch (Exception e) {
@@ -51,11 +56,10 @@ public class TestClienteDAO extends TestCase{
 			cliente.setTelefone("(16)3322-0504");
 			cliente.setComplemento("Ap. 123");
 			cliente.setId(0);
-			cliente.setLogin("g@g.com","205080");
+			cliente.setLogin("l@l.com","205080");
 			cliente.setNome("Gabriel");
 			cliente.setSobrenome("Galeazzi");
 			cliente.setCep("48788978");
-			ClienteDAO dao = new ClienteDAO();
 			dao.NovoCliente(cliente);
 			
 		} catch (Exception e) {
@@ -66,6 +70,24 @@ public class TestClienteDAO extends TestCase{
 		
 	}
 	
+	public void testListaClientes() 
+	{
+		try {
+			@SuppressWarnings("unchecked")
+			List<Cliente> lista = (List<Cliente>)dao.ListarClientes();
+			for(Cliente cliente : lista)
+			{
+				System.out.println(cliente.toString());
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	
 	

@@ -61,7 +61,7 @@ public class Login {
 		this.tipo = tipo;
 	}
 	
-	
+	public Login(){}
 	
 	
 }

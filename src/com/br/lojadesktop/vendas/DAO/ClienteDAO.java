@@ -3,12 +3,12 @@
  */
 package com.br.lojadesktop.vendas.DAO;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import com.br.lojadesktop.vendas.javaBean.Cliente;
 import com.br.lojadesktop.vendas.javaBean.ClienteFisico;
@@ -24,7 +24,6 @@ public class ClienteDAO {
 	     private final EntityManagerFactory factory =
 				Persistence.createEntityManagerFactory("loja");
 		 private final EntityManager em = factory.createEntityManager();
-		 
 		
 		 public void NovoCliente(Cliente cliente)
 		 {
@@ -34,20 +33,33 @@ public class ClienteDAO {
 		 }
 		 public void DeletaCliente(Cliente cliente)
 		 {
-			 em.getTransaction().begin();
-				Query query = (Query) em.createQuery("Delete from Profissional where user = :user");
-				query.setParameter("user", cliente.getLogin().getuser());
-				query.executeUpdate();
-				em.getTransaction().commit();
+			if(cliente.getClass()==ClienteJuridico.class)
+				DeletaJuridico((ClienteJuridico) cliente);
+			else
+				DeletaFisico((ClienteFisico) cliente);
 			
+		 }
+		 private void DeletaJuridico(ClienteJuridico cliente)
+		 {
+			 em.getTransaction().begin();
+			 em.createQuery("delete from Cliente where cnpj = :cnpj ").setParameter("cnpj", cliente.getCnpj()).executeUpdate();
+			 em.createQuery("delete from Login where user= :user ").setParameter("user",cliente.getLogin().getuser()).executeUpdate();
+			 em.getTransaction().commit(); 
+		 }
+		 private void DeletaFisico(ClienteFisico cliente)
+		 {
+			 em.getTransaction().begin();
+			 em.createQuery("delete from Cliente where cpf = :cpf ").setParameter("cpf", cliente.getCpf()).executeUpdate();
+			 em.createQuery("delete from Login where user= :user ").setParameter("user",cliente.getLogin().getuser()).executeUpdate();
+			 em.getTransaction().commit(); 
 		 }
 		 public void AlteraCliente(Cliente atual,Cliente diferente)
 		 {
 			 
 		 }
-		 public ArrayList<Cliente> ListarClientes()
+		 public List<?> ListarClientes()
 		 {
-			 return null;
+			 return em.createQuery("from Cliente").getResultList();
 		 }
 		 public Cliente BuscaCliente()
 		 {
@@ -59,31 +71,6 @@ public class ClienteDAO {
 			 return null;
 		 }
 		
-		 public static void main(String args[])
-		 {
-			
-				
-					try {
-						
-						Cliente cliente = new ClienteFisico("41954438818","41954438818");
-						cliente.setCelular("(16)99777-7974");
-						cliente.setTelefone("(16)3322-0504");
-						cliente.setComplemento("Ap. 123");
-						cliente.setId(0);
-						cliente.setLogin("g@g.com","205080");
-						cliente.setNome("Gabriel");
-						cliente.setSobrenome("Galeazzi");
-						cliente.setCep("48788978");
-						ClienteDAO dao = new ClienteDAO();
-						dao.DeletaCliente(cliente);
-						
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					
-				
-		 }
+		
 		 
 }

@@ -3,7 +3,7 @@
  */
 package com.br.lojadesktop.vendas.javaBean;
 
-import javax.persistence.Column;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -56,7 +56,7 @@ public class ClienteJuridico extends Cliente {
 				+ getTelefone() + "]";
 	}
 	
-	
+	public ClienteJuridico(){}
 	
 	
 }
