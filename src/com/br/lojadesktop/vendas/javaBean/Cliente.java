@@ -16,10 +16,9 @@ import com.br.lojadesktop.valid.Valid;
  */
 
 @Entity
-@Table(name = "Cliente")
 @SequenceGenerator(name = "LOGIN_SEQUENCE", sequenceName = "LOGIN_SEQUENCE", allocationSize = 1, initialValue = 0)
 @DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("C")
+@DiscriminatorValue("P")
 public class Cliente {
 
 	@Id
@@ -39,7 +38,7 @@ public class Cliente {
 	private String telefone;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="login_id")
 	private Login login;
 	
 	public Login getLogin() {

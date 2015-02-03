@@ -28,7 +28,7 @@ public class TestClienteDAO2 extends TestCase {
 				cliente.setTelefone("(16)3322-0504");
 				cliente.setComplemento("Ap. 123");
 				cliente.setId(0);
-				cliente.setLogin("l@l.com","205080");
+				cliente.setLogin("empresa@e.com","205080");
 				cliente.setNome("Gabriel");
 				cliente.setSobrenome("Galeazzi");
 				cliente.setCep("48788978");

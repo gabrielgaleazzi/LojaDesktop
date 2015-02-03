@@ -151,6 +151,12 @@ public class ClienteDAO {
 		{
 			return (Cliente) em.getReference(Cliente.class, id);
 		}
+		public Cliente getClienteLogged(int id)
+		{
+			return (Cliente) em.createQuery("from Cliente where login_id = :login_id").
+					 setParameter("login_id", id).getResultList().get(0);
+			
+		}
 		
 	
 		 

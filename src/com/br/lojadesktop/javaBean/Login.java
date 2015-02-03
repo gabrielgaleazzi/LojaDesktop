@@ -5,7 +5,7 @@ package com.br.lojadesktop.javaBean;
 
 import javax.persistence.*;
 
-import jdk.nashorn.internal.ir.annotations.Reference;
+
 
 import com.br.lojadesktop.valid.Valid;
 import com.br.lojadesktop.vendas.javaBean.Cliente;
@@ -16,8 +16,9 @@ import com.br.lojadesktop.vendas.javaBean.Cliente;
  *
  */
 @Entity
-@Table(name="Login")
 @SequenceGenerator(name="LOGIN_SEQUENCE", sequenceName="LOGIN_SEQUENCE", allocationSize=1, initialValue=0)
+@Inheritance(strategy=InheritanceType.JOINED) 
+
 public class Login {
 
 	@Id
@@ -27,7 +28,7 @@ public class Login {
 	private String user;
 	@Column
 	private String senha;
-	
+	@Column
 	private char tipo;
 	
 	public int getId() {
@@ -37,8 +38,6 @@ public class Login {
 		this.id = id;
 	}
 	
-
-
 	public String getuser() {
 		return user;
 	}

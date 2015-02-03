@@ -28,8 +28,10 @@ public class LoginDAO {
 	 }
 	public Object Login(Login login)
 	{
+		ClienteDAO dao = new ClienteDAO();
 		List<?> lista =  em.createQuery("from Login where"
-				+ " user = :user and senha = :senha").
+				+ " user = :user"
+				+ " and senha = :senha").
 		 setParameter("user", login.getuser()).
 		 setParameter("senha", login.getSenha()).
 		 getResultList();
@@ -37,7 +39,9 @@ public class LoginDAO {
 			return null;
 		Login logado = (Login) lista.get(0);
 		if(logado.getTipo()=='C')
-		//return ClienteDAO.getCliente(logado.getId());	
+		return dao.getClienteLogged(logado.getId());	
+		
+	
 		if(logado.getTipo()=='V')	
 		return null;	
 			 
