@@ -32,7 +32,7 @@ public class TestClienteDAO2 extends TestCase {
 				cliente.setNome("Gabriel");
 				cliente.setSobrenome("Galeazzi");
 				cliente.setCep("48788978");
-				dao.DeletaCliente(cliente);
+				dao.DeleteCliente(cliente);
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -56,7 +56,7 @@ public class TestClienteDAO2 extends TestCase {
 				cliente.setNome("Gabriel");
 				cliente.setSobrenome("Galeazzi");
 				cliente.setCep("48788978");
-				dao.DeletaCliente(cliente);
+				dao.DeleteCliente(cliente);
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -70,7 +70,7 @@ public class TestClienteDAO2 extends TestCase {
 	{
 		try {
 			@SuppressWarnings("unchecked")
-			List<Cliente> lista = (List<Cliente>)dao.ListarClientes();
+			List<Cliente> lista = (List<Cliente>)dao.getList();
 			for(Cliente cliente : lista)
 			{
 				System.out.println(cliente.toString());
