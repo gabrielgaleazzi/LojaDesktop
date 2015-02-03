@@ -5,7 +5,10 @@ package com.br.lojadesktop.javaBean;
 
 import javax.persistence.*;
 
+import jdk.nashorn.internal.ir.annotations.Reference;
+
 import com.br.lojadesktop.valid.Valid;
+import com.br.lojadesktop.vendas.javaBean.Cliente;
 
 
 /**
@@ -18,19 +21,22 @@ import com.br.lojadesktop.valid.Valid;
 public class Login {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="LOGIN_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY , generator="LOGIN_SEQUENCE")
 	private int id;
 	@Column
 	private String user;
 	@Column
-	private String senha;	
+	private String senha;
+	
+	private char tipo;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	private char tipo;
+	
 
 
 	public String getuser() {

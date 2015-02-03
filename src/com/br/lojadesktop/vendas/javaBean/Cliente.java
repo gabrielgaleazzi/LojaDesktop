@@ -17,13 +17,13 @@ import com.br.lojadesktop.valid.Valid;
 
 @Entity
 @Table(name = "Cliente")
-@SequenceGenerator(name = "CLIENTE_SEQUENCE", sequenceName = "CLIENTE_SEQUENCE", allocationSize = 1, initialValue = 0)
+@SequenceGenerator(name = "LOGIN_SEQUENCE", sequenceName = "LOGIN_SEQUENCE", allocationSize = 1, initialValue = 0)
 @DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("C")
 public class Cliente {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "CLIENTE_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "LOGIN_SEQUENCE")
 	private int id;
 	@Column
 	private String nome;

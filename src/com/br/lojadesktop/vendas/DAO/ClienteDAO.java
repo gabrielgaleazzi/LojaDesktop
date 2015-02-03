@@ -21,9 +21,9 @@ import com.br.lojadesktop.vendas.javaBean.Venda;
  */
 public class ClienteDAO {
 
-	     private final EntityManagerFactory factory =
+	     private final  EntityManagerFactory factory =
 				Persistence.createEntityManagerFactory("loja");
-		 private final EntityManager em = factory.createEntityManager();
+		 private final  EntityManager em = factory.createEntityManager();
 		
 		 public ClienteDAO()
 		 {
@@ -146,8 +146,12 @@ public class ClienteDAO {
 		 {
 			 return null;
 		 }
+	
+		public Cliente getCliente(int id)
+		{
+			return (Cliente) em.getReference(Cliente.class, id);
+		}
 		
-		
-		
+	
 		 
 }

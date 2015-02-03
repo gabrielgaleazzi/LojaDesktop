@@ -30,6 +30,7 @@ public class TestClienteDAO extends TestCase{
 	public void testClienteFisico() 
 	{
 		try {
+			
 			Cliente cliente = new ClienteFisico("4546546565","41954438818");
 			cliente.setCelular("(16)99777-7974");
 			cliente.setTelefone("(16)3322-0504");
