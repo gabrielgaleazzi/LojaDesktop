@@ -23,7 +23,7 @@ public class Vendedor extends Administrativo{
 
 	public Vendedor(String nome, String cPF, String rG,String login, String senha) throws Exception {
 		super(nome,cPF,rG);
-		this.login= new Login(login,senha,'F');
+		this.login= new Login(login,senha,'V');
 	}
 
 	public String toString() {
