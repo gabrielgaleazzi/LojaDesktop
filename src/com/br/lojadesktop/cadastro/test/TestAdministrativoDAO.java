@@ -26,8 +26,12 @@ public class TestAdministrativoDAO extends TestCase {
 	System.out.println(vend.toString());
 	adm.createFuncionario(ger);
 	adm.createFuncionario(vend);
-	adm.deleteFuncionario(ger);
-	adm.deleteFuncionario(vend);
+	ger.setNome("Romario");
+	vend.setLogin("r1@r1.com.br", "098765");
+	adm.altereFuncionarioCPF(ger);
+	adm.altereFuncionarioCPF(vend);
+	//adm.deleteFuncionario(ger);
+	//adm.deleteFuncionario(vend);
 	
 	}
 	
