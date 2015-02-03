@@ -83,3 +83,12 @@ public class BD
         }
     }
 }
+
+/*CREATE TABLE `loja`.`funcionario` (
+  `idFuncionario` INT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NULL,
+  `cpf` VARCHAR(11) NULL,
+  `rg` VARCHAR(45) NULL,
+  `login` VARCHAR(45) NULL,
+  `senha` VARCHAR(45) NULL,
+  PRIMARY KEY (`idFuncionario`));*/
