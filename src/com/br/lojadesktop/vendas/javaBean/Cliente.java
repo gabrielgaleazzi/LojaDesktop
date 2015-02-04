@@ -16,13 +16,12 @@ import com.br.lojadesktop.valid.Valid;
  */
 
 @Entity
-@SequenceGenerator(name = "LOGIN_SEQUENCE", sequenceName = "LOGIN_SEQUENCE", allocationSize = 1, initialValue = 0)
 @DiscriminatorColumn(name = "tipo", length = 2, discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("P")
 public class Cliente {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY , generator = "LOGIN_SEQUENCE")
+    @GeneratedValue
 	private int id;
 	@Column
 	private String nome;

@@ -16,13 +16,11 @@ import com.br.lojadesktop.vendas.javaBean.Cliente;
  *
  */
 @Entity
-@SequenceGenerator(name="LOGIN_SEQUENCE", sequenceName="LOGIN_SEQUENCE", allocationSize=1, initialValue=0)
 @Inheritance(strategy=InheritanceType.JOINED) 
-
 public class Login {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY , generator="LOGIN_SEQUENCE")
+    @GeneratedValue
 	private int id;
 	@Column
 	private String user;

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import com.br.lojadesktop.cadastro.javaBean.Produtos;
+import com.br.lojadesktop.cadastro.javaBean.Produto;
 
 /**
  * @author gabrielgaleazzi
@@ -25,9 +25,9 @@ public class Venda extends Carrinho{
 		this.tipo = tipo;
 	}
 
-	public Venda(ArrayList<Produtos> produtos, Cliente cliente,
+	public Venda(int id, ArrayList<Produto> produtos, Cliente cliente,
 			BigDecimal valor, Pagamento tipo) {
-		super(produtos, cliente, valor);
+		super(id, produtos, cliente, valor);
 		this.tipo = tipo;
 	}
 
@@ -38,8 +38,8 @@ public class Venda extends Carrinho{
 				+ getValorReal() + ", getValorRealDesconto()=" + getValorRealDesconto() + "]";
 	}
 
-	public Venda(Carrinho carrinho, Pagamento tipo) {
-		super(carrinho.getProdutos(), carrinho.getCliente(), carrinho.getValor());
+	public Venda(int id, Carrinho carrinho, Pagamento tipo) {
+		super(id, carrinho.getProdutos(), carrinho.getCliente(), carrinho.getValor());
 		this.tipo = tipo;
 	}
 	

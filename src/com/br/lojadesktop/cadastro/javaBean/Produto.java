@@ -5,6 +5,12 @@
 package com.br.lojadesktop.cadastro.javaBean;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 import com.br.lojadesktop.valid.Valid;
 /**
@@ -12,40 +18,56 @@ import com.br.lojadesktop.valid.Valid;
  *
  * 
  */
-public class Produtos {
-	private int idProduto;
-	private String Nome;
-	private String Tipo;
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED) 
+public class Produto {
+	@Id
+    @GeneratedValue
+	private int id;
+	@Column
+	private String nome;
+	@Column
+	private String tipo;
+	@Column
 	private String descricao;
+	@Column
 	private BigDecimal valor;
-
-	public int getIdProduto() {
-		return idProduto;
+	public int getQuantidade() {
+		return quantidade;
 	}
-	public void setIdProduto(int idProduto) {
-		this.idProduto = idProduto;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+	@Column
+	private int quantidade;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
-	public Produtos(int idProduto, String nome, String tipo, String descricao,
+	public Produto(int id, String nome, String tipo, String descricao,
 			BigDecimal valor) throws Exception {
 		super();
-		this.idProduto = idProduto;
-		Nome = nome;
-		Tipo = tipo;
+		this.id = id;
+		this.nome = nome;
+		this.tipo = tipo;
 		this.descricao = descricao;
 		setValor(valor);
 	}
 	public String getTipo() {
-		return Tipo;
+		return tipo;
 	}
 	
 	public void setTipo(String tipo) {
-		Tipo = tipo;
+		this.tipo = tipo;
 	}
 	public String getDescricao() {
 		return descricao;
@@ -64,8 +86,8 @@ public class Produtos {
 		}
 	@Override
 	public String toString() {
-		return "Produtos [idProduto=" + idProduto + ", Nome=" + Nome
-				+ ", Tipo=" + Tipo + ", descricao=" + descricao + ", valor="
+		return "Produtos [id=" + id + ", Nome=" + nome
+				+ ", Tipo=" + tipo + ", descricao=" + descricao + ", valor="
 				+ valor + "]";
 	}
 	public void setValor(BigDecimal valor) throws Exception {
@@ -74,5 +96,7 @@ public class Produtos {
 	
 		this.valor = valor;
 	} 
+	
+	public Produto(){}
 	
 }
