@@ -6,6 +6,7 @@ package com.br.lojadesktop.vendas.test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.br.lojadesktop.cadastro.javaBean.Produto;
@@ -22,14 +23,7 @@ import junit.framework.TestCase;
 public class TestProdutoDAO extends TestCase{
 
 	ProdutoDAO dao = new ProdutoDAO();
-	public void testBuscaProduto() 
-	{
-		List<Produto> lista = (List<Produto>) dao.getList("TV Sony");
-		for(Produto produto:lista)
-		{
-			System.out.println(produto.toString());
-		}
-	}
+	
 	
 	public void testNewProduto() throws Exception
 	{
@@ -88,7 +82,7 @@ public class TestProdutoDAO extends TestCase{
 		res = dao.newProduto(produto5);
 		System.out.println(res);
 		
-		
+		System.out.println("-----------------------------------------------------------------");
 		
 	}
 	
@@ -100,10 +94,63 @@ public class TestProdutoDAO extends TestCase{
 		produto.setQuantidade(3);
 		produto.setTipo("Esporte/Roupas");
 		produto.setValor(new BigDecimal(199.99));
-		dao.SellProduto(produto);
+		int op =  dao.SellProduto(produto);
+		if (op==1)
+			System.out.println("Produto Vendido");
+		else
+			System.out.println("Produto indisponivel do estoque");
+		System.out.println("-----------------------------------------------------------------");
 		
 	}
 	
+	public void testBuscaProduto() 
+	{
+		@SuppressWarnings("unchecked")
+		List<Produto> lista = (List<Produto>) dao.getList("TV Sony");
+		System.out.println("-----------------------------------------------------------------");
+		for(Produto produto:lista)
+		{
+			System.out.println(produto.toString());
+		}
+	}
+	
+	public void testSellProdutosLista() throws Exception
+	{
+		ArrayList<Produto> lista = new ArrayList<Produto>();
+		System.out.println("-----------------------------------------------------------------");
+		Produto produto = new Produto();
+		produto.setDescricao("Segunda Camisa do SPFC, temporada 2009/2010, Material: Penalty");
+		produto.setNome("Camisa SPFC");
+		produto.setQuantidade(3);
+		produto.setTipo("Esporte/Roupas");
+		produto.setValor(new BigDecimal(199.99));
+		Produto produto3 = new Produto();
+		
+		produto3.setDescricao("Notebook HP, i7, HD de 1tb ");
+		produto3.setNome("Notebook HP 18' ");
+		produto3.setQuantidade(10);
+		produto3.setTipo("Tecnologia");
+		produto3.setValor(new BigDecimal(2229.99));
+		lista.add(produto);
+		lista.add(produto3);
+		
+		dao.SellProduto(lista);
+		
+	}
+	public void testBuscaporValor() throws Exception
+	{
+		System.out.println("SPFCCCC-----------------------------------------------------------------");
+		@SuppressWarnings("unchecked")
+		Produto produto = new Produto();
+		produto.setValor(new BigDecimal(2229.99));
+		List<Produto> lista = (List<Produto>) dao.getList(produto);
+		
+		for(Produto pr:lista)
+		{
+			System.out.println(pr.toString());
+		}
+	
+	}
 	
 
 }

@@ -80,10 +80,16 @@ public class Produto {
 		java.text.DecimalFormat df = new java.text.DecimalFormat( "#,##0.00" ); 
 		return "R$ "+df.format(this.valor);
 	}
+	
 	public BigDecimal getValor()  {
 			
 		return this.valor;
 		}
+	
+	public Double getDoubleValor()
+	{
+		return this.valor.doubleValue();
+	}
 	@Override
 	public String toString() {
 		return "Produtos [id=" + id + ", Nome=" + nome

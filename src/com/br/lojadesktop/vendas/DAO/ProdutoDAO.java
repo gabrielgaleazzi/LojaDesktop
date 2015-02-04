@@ -13,6 +13,7 @@ import javax.persistence.Persistence;
 
 import com.br.lojadesktop.cadastro.javaBean.Produto;
 import com.br.lojadesktop.vendas.javaBean.Carrinho;
+import com.br.lojadesktop.vendas.javaBean.Cliente;
 
 /**
  * @author gabrielgaleazzi
@@ -56,25 +57,33 @@ public class ProdutoDAO {
 		 return lista.size()==0? false: true;
 	 }
 	 
-	 public void SellProduto(Produto produto)
+	 private boolean Estoque(Produto produto)
 	 {
+		 List<?> lista = (List<?>) em.createQuery("from Produto where nome = :nome").
+				 setParameter("nome", produto.getNome()).
+				 getResultList();
+		 return lista.size()==0? false: ((Produto) lista.get(0)).getQuantidade()==0?false:true;
+	 }
+	 
+	 public int SellProduto(Produto produto)
+	 {
+		 if(Estoque(produto)){
 		 em.getTransaction().begin(); 
 		 em.createQuery("Update Produto set quantidade = quantidade -1"
 			 		+ " where nome = :nome").
 			 setParameter("nome", produto.getNome()).
 			 executeUpdate();
 		 	em.getTransaction().commit();
-		 
+		 	return 1;
+		 }
 			 
-			
+			return 0;
 	 }
 	 
 	 public void SellProduto(ArrayList<Produto> lista)
 	 {
 		 for(Produto produto:lista)
-		 {
 			 SellProduto(produto);
-		 }
 	 }
 	 public void SellProduto(Carrinho carrinho)
 	 {
@@ -111,9 +120,12 @@ public class ProdutoDAO {
 		 return null;
 	 }
 	 
-	 public List<?> getList(BigDecimal valor)
+	 public List<?> getList(Produto produto)
 	 {
-		return null;
+		System.out.println(produto.getValor());
+		 return (List<?>) em.createQuery("from Produto where valor = :valor").
+				 setParameter("valor", produto.getValor()).
+				 getResultList();
 		 
 	 }
 	 
