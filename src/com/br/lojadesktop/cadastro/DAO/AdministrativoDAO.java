@@ -77,14 +77,20 @@ public class AdministrativoDAO {
 		else
 			altereVendedorNome((Vendedor) adm);
 	}
+	
 	private void altereGerenteNome(Gerente ger) throws Exception{
 		String SQL="";
 		System.out.println(SQL);
 		bd.execComando(SQL);
 	}
+	
 	private void altereVendedorNome(Vendedor vend) throws Exception{
 		String SQL="";
 		System.out.println(SQL);
 		bd.execComando(SQL);
+	}
+	
+	public void qualId(Administrativo adm){
+		
 	}
 }

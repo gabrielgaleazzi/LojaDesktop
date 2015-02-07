@@ -11,6 +11,6 @@
 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/loja" /> 
 <property name="javax.persistence.jdbc.user" value="root" /> 
-<property name="javax.persistence.jdbc.password" value="306090" />
+<property name="javax.persistence.jdbc.password" value="Rafa9074" />
 </properties> </persistence-unit> </persistence>
 
