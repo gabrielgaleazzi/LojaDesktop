@@ -15,14 +15,13 @@ public class Gerente extends Administrativo {
 	public Login getLogin() {
 		return login;
 	}
-	public void setLogin(Login login) {
-		this.login = login;
+	public void setLogin(String login,String senha) throws Exception {
+		this.login = new Login(login,senha,'F');
 	}
-	public Gerente(String nome, String cPF, String rG,String login, String senha)throws Exception 
-	{
-		super(nome, cPF, rG);
-		this.login = new Login(login,senha,'G');
+
+	public Gerente(String nome, String sobrenome, String cPF, String rG,
+			String cep, String complemento, String celular, String telefone,String user, String senha) throws Exception {
+		super(nome, sobrenome, cPF, rG, cep, complemento, celular, telefone);
+		this.login = new Login(user,senha,'G');
 	}
-	
-	
 }

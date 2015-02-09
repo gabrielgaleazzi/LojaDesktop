@@ -21,13 +21,14 @@ public class TestAdministrativoDAO extends TestCase {
 	           "jdbc:mysql://localhost/loja",
 	           "root", "Rafa9074");
 	AdministrativoDAO adm = new AdministrativoDAO(bd);
-	Vendedor vend = new Vendedor("Rafael","40769055800","366951890","r@r.com.br","123456");
-	Gerente ger= new Gerente("Joao","57919372291","566001890","g@g.com.br","123456");
-	System.out.println(vend.toString());
-	adm.createFuncionario(ger);
-	adm.createFuncionario(vend);
-	ger.setNome("Romario");
-	vend.setLogin("r1@r1.com.br", "098765");
+	Vendedor vend = new Vendedor("Rafael","Souza","40769055800","36695190","13330010","","19992534332","","r9@r9.com.br","7723456");
+	Gerente ger= new Gerente("Joao","marcos","57919372291","566001890","13330010","","","","g@g.com.br","123456");
+	System.out.println(ger.toString());
+	//adm.createFuncionario(ger);
+	//adm.createFuncionario(vend);
+	//ger.setNome("Romario");
+	//ger.setLogin("kasda@r1.com.br", "098765");
+	//adm.altereFuncionarioNome(vend);
 	adm.altereFuncionarioCPF(ger);
 	adm.altereFuncionarioCPF(vend);
 	//adm.deleteFuncionario(ger);

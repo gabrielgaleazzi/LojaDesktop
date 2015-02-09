@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class TestGerente extends TestCase {
 	public void testGerente(){
 		try {
-			Gerente g = new Gerente("Rafael","40769055800","36695190","ra@sa.com","123112");
+			Gerente g = new Gerente("Rafael","Souza","40769055800","36695190","13330010","","19992534332","","ra@sa.com","123112");
 			System.out.println(g.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 public class TestFuncionarios extends TestCase {
 	public void testFuncionarios(){
 		try {
-			Vendedor g = new Vendedor("Rafael","40769055800","36695190","ra@sa.com","123112");
+			Vendedor g = new Vendedor("Rafael","Souza","40769055800","36695190","13330010","","19992534332","","ra@sa.com","123112");
 			System.out.println(g.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

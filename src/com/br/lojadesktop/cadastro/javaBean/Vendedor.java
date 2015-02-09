@@ -21,15 +21,24 @@ public class Vendedor extends Administrativo{
 		this.login = new Login(login,senha,'F');
 	}
 
-	public Vendedor(String nome, String cPF, String rG,String login, String senha) throws Exception {
-		super(nome,cPF,rG);
-		this.login= new Login(login,senha,'V');
+	public Vendedor(String nome, String sobrenome, String cPF, String rG,
+			String cep, String complemento, String celular, String telefone,
+			String user,String senha) throws Exception {
+		super(nome, sobrenome, cPF, rG, cep, complemento, celular, telefone);
+		this.login =new Login(user,senha,'F');
 	}
 
 	public String toString() {
-		return "Funcionarios [Nome=" + getNome() + ", CPF="
-				+ getCPF() + ", RG=" + getRG() + "Login=" + login.getuser() +", Senha="
-				+login.getSenha()+ "]";
+		return "Vendedor [login=" + login + ", getLogin()=" + getLogin()
+				+ ", getNome()=" + getNome() + ", getSobrenome()="
+				+ getSobrenome() + ", getCPF()=" + getCPF() + ", getRG()="
+				+ getRG() + ", getCep()=" + getCep() + ", getComplemento()="
+				+ getComplemento() + ", getCelular()=" + getCelular()
+				+ ", getTelefone()=" + getTelefone() + ", hashCode()="
+				+ hashCode() + ", getClass()=" + getClass() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	
 	
 }

@@ -17,7 +17,7 @@ public class TestAdministrativo extends TestCase {
 		{
 			
 			try {
-				Administrativo adm = new Administrativo("Rafael","40769055800","36695190");
+				Administrativo adm = new Administrativo("Rafael","Souza","40769055800","36695190","13330010","","19992534332","");
 				System.out.println(adm.toString());
 			} 
 			catch (Exception e) {

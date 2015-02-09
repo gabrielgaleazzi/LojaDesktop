@@ -3,10 +3,13 @@
  */
 package com.br.lojadesktop.cadastro.DAO;
 
+import java.sql.ResultSet;
+
 import com.br.lojadesktop.ConexaoBanco.BD;
 import com.br.lojadesktop.cadastro.javaBean.Administrativo;
 import com.br.lojadesktop.cadastro.javaBean.Gerente;
 import com.br.lojadesktop.cadastro.javaBean.Vendedor;
+import com.br.lojadesktop.vendas.DAO.LoginDAO;
 import com.br.lojadesktop.vendas.javaBean.ClienteFisico;
 import com.br.lojadesktop.vendas.javaBean.ClienteJuridico;
 
@@ -18,9 +21,12 @@ import com.br.lojadesktop.vendas.javaBean.ClienteJuridico;
 public class AdministrativoDAO {
 	
 	private BD bd;
+	private LoginDAO log=new LoginDAO();
+	
 	public AdministrativoDAO(BD bd){
 		this.bd=bd;
 	}
+	
 	public void createFuncionario(Administrativo adm) throws Exception{
 		if(adm.getClass()==Gerente.class)
 			createGerente((Gerente) adm);
@@ -29,14 +35,17 @@ public class AdministrativoDAO {
 		
 	}
 	private void createVendedor(Vendedor vend) throws Exception{
-		String SQL = "INSERT INTO `loja`.`funcionario` (`nome`, `cpf`, `rg`, `login`, `senha`, `cargo`) VALUES ('"+vend.getNome()+"', '"+vend.getCPF()+"', '"+vend.getRG()+"', '"+vend.getLogin().getuser()+"', '"+vend.getLogin().getSenha()+"','"+vend.getLogin().getTipo()+"');";
+		String SQL="INSERT INTO `loja`.`Login` (`senha`, `tipo`, `user`) VALUES ('"+vend.getLogin().getSenha()+"', '"+vend.getLogin().getTipo()+"', '"+vend.getLogin().getuser()+"');";
 		bd.execComando(SQL);
+		SQL ="INSERT INTO `loja`.`Funcionario` (`nome`, `sobrenome`, `cpf`, `rg`, `cep`, `complemento`, `celular`, `telefone`, `login_id`) VALUES ('"+vend.getNome()+"', '"+vend.getSobrenome()+"', '"+vend.getCPF()+"', '"+vend.getRG()+"', '"+vend.getCep()+"', '"+vend.getComplemento()+"', '"+vend.getCelular()+"', '"+vend.getTelefone()+"', '"+log.getId(vend.getLogin().getuser())+"');";
 		System.out.println(SQL);
+		bd.execComando(SQL);
 	}
 	private void createGerente(Gerente gerente) throws Exception{
-		String SQL = "INSERT INTO `loja`.`funcionario` (`nome`, `cpf`, `rg`, `login`, `senha`, `cargo`) VALUES ('"+gerente.getNome()+"', '"+gerente.getCPF()+"', '"+gerente.getRG()+"', '"+gerente.getLogin().getuser()+"', '"+gerente.getLogin().getSenha()+"','"+gerente.getLogin().getTipo()+"');";
+		String SQL="INSERT INTO `loja`.`Login` (`senha`, `tipo`, `user`) VALUES ('"+gerente.getLogin().getSenha()+"', '"+gerente.getLogin().getTipo()+"', '"+gerente.getLogin().getuser()+"');";
 		bd.execComando(SQL);
-		System.out.println(SQL);
+		SQL ="INSERT INTO `loja`.`Funcionario` (`nome`, `sobrenome`, `cpf`, `rg`, `cep`, `complemento`, `celular`, `telefone`, `login_id`) VALUES ('"+gerente.getNome()+"', '"+gerente.getSobrenome()+"', '"+gerente.getCPF()+"', '"+gerente.getRG()+"', '"+gerente.getCep()+"', '"+gerente.getComplemento()+"', '"+gerente.getCelular()+"', '"+gerente.getTelefone()+"', '"+log.getId(gerente.getLogin().getuser())+"');";
+		bd.execComando(SQL);
 	}
 	
 	public void deleteFuncionario(Administrativo adm) throws Exception{
@@ -55,6 +64,7 @@ public class AdministrativoDAO {
 		System.out.println(SQL);
 		bd.execComando(SQL);
 	}
+	
 	public void altereFuncionarioCPF(Administrativo adm) throws Exception{
 		if(adm.getClass()==Gerente.class)
 			altereGerenteCPF((Gerente) adm);
@@ -62,35 +72,65 @@ public class AdministrativoDAO {
 			altereVendedorCPF((Vendedor) adm);
 	}
 	private void altereGerenteCPF(Gerente ger) throws Exception{
-		String SQL="UPDATE `loja`.`funcionario` SET `nome`='"+ger.getNome()+"', `rg`='"+ger.getRG()+"', `login`='"+ger.getLogin().getuser()+"', `senha`='"+ger.getLogin().getSenha()+"', `cargo`='"+ger.getLogin().getTipo()+"' WHERE `cpf`='"+ger.getCPF()+"';";
+		String SQL="UPDATE `loja`.`Funcionario` SET `nome`='"+ger.getNome()+"', `sobrenome`='"+ger.getSobrenome()+"', `rg`='"+ger.getRG()+"', `cep`='"+ger.getCep()+"', `complemento`='"+ger.getComplemento()+"', `celular`='"+ger.getCelular()+"', `telefone`='"+ger.getTelefone()+"' WHERE `cpf`='"+ger.getCPF()+"';";
+		System.out.println(SQL);
+		bd.execComando(SQL);
+		SQL="SELECT * FROM loja.Funcionario where cpf='"+ger.getCPF()+"';";
+		System.out.println(SQL);
+		ResultSet result = bd.execConsulta(SQL);
+		int id=0;
+		while(result.next())
+		id=result.getInt("login_id");
+		
+		SQL ="UPDATE `loja`.`Login` SET `senha`='"+ger.getLogin().getSenha()+"', `user`='"+ger.getLogin().getuser()+"' WHERE `id`='"+id+"';";
 		System.out.println(SQL);
 		bd.execComando(SQL);
 	}
 	private void altereVendedorCPF(Vendedor vend) throws Exception{
-		String SQL="UPDATE `loja`.`funcionario` SET `nome`='"+vend.getNome()+"', `rg`='"+vend.getRG()+"', `login`='"+vend.getLogin().getuser()+"', `senha`='"+vend.getLogin().getSenha()+"' WHERE `cpf`='"+vend.getCPF()+"';";
+		String SQL="UPDATE `loja`.`Funcionario` SET `nome`='"+vend.getNome()+"', `sobrenome`='"+vend.getSobrenome()+"', `rg`='"+vend.getRG()+"', `cep`='"+vend.getCep()+"', `complemento`='"+vend.getComplemento()+"', `celular`='"+vend.getCelular()+"', `telefone`='"+vend.getTelefone()+"' WHERE `cpf`='"+vend.getCPF()+"';";
+		System.out.println(SQL);
+		bd.execComando(SQL);
+		SQL="SELECT * FROM loja.Funcionario where cpf='"+vend.getCPF()+"';";
+		System.out.println(SQL);
+		ResultSet result = bd.execConsulta(SQL);
+		int id=0;
+		while(result.next()){
+		id=result.getInt("login_id");
+		System.out.println(id);
+		}
+		SQL ="UPDATE `loja`.`Login` SET `senha`='"+vend.getLogin().getSenha()+"', `user`='"+vend.getLogin().getuser()+"' WHERE `id`='"+id+"';";
 		System.out.println(SQL);
 		bd.execComando(SQL);
 	}
+	
+
+	
+	
+	
 	public void altereFuncionarioNome(Administrativo adm) throws Exception{
 		if(adm.getClass()==Gerente.class)
 			altereGerenteNome((Gerente) adm);
 		else
 			altereVendedorNome((Vendedor) adm);
 	}
-	
 	private void altereGerenteNome(Gerente ger) throws Exception{
-		String SQL="";
+		String SQL="SELECT * FROM loja.Funcionario where nome='"+ger.getNome()+"';";
 		System.out.println(SQL);
-		bd.execComando(SQL);
+		ResultSet result = bd.execConsulta(SQL);
+		int id=0;
+		while(result.next()){
+			id=result.getInt("login_id");
+			System.out.println(id);
+		}
 	}
-	
 	private void altereVendedorNome(Vendedor vend) throws Exception{
-		String SQL="";
+		String SQL="SELECT * FROM loja.Funcionario where nome='"+vend.getNome()+"';";
 		System.out.println(SQL);
-		bd.execComando(SQL);
-	}
-	
-	public void qualId(Administrativo adm){
-		
+		ResultSet result = bd.execConsulta(SQL);
+		int id=0;
+		while(result.next()){
+			id=result.getInt("login_id");
+			System.out.println(id);
+		}
 	}
 }
