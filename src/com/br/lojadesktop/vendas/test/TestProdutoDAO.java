@@ -82,6 +82,15 @@ public class TestProdutoDAO extends TestCase{
 		res = dao.newProduto(produto5);
 		System.out.println(res);
 		
+		Produto produto6 = new Produto();
+		produto6.setDescricao("Jogo de Futebol Fifa 15, PT-BR");
+		produto6.setNome("Fifa 15");
+		produto6.setQuantidade(20);
+		produto6.setTipo("Games");
+		produto6.setValor(new BigDecimal(159.45));
+		res = dao.newProduto(produto6);
+		System.out.println(res);
+		
 		System.out.println("-----------------------------------------------------------------");
 		
 	}
@@ -139,11 +148,9 @@ public class TestProdutoDAO extends TestCase{
 	}
 	public void testBuscaporValor() throws Exception
 	{
-		System.out.println("SPFCCCC-----------------------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------");
 		@SuppressWarnings("unchecked")
-		Produto produto = new Produto();
-		produto.setValor(new BigDecimal(2229.99));
-		List<Produto> lista = (List<Produto>) dao.getList(produto);
+		List<Produto> lista = (List<Produto>) dao.getList(new BigDecimal("159.45"));
 		
 		for(Produto pr:lista)
 		{
@@ -152,5 +159,54 @@ public class TestProdutoDAO extends TestCase{
 	
 	}
 	
-
+	public void testBuscaProdutoUnico() throws Exception
+	{
+		System.out.println("-----------------------------------------------------------------");
+		Produto produto = new Produto();
+		produto.setDescricao("Segunda Camisa do SPFC");
+		produto.setNome("Camisa SPFC");
+		produto.setTipo("Esporte/Roupas");
+		produto = dao.getProduto(produto);
+		System.out.println(produto.toString());
+	}
+	
+	public void testBuscaEntreValores() throws Exception
+	{
+		System.out.println("lista -----------------------------------------------------------------");
+		@SuppressWarnings("unchecked")
+		List<Produto> lista = (List<Produto>) dao.getList(new BigDecimal("0"),new BigDecimal("300"));
+		
+		for(Produto pr:lista)
+		{
+			System.out.println(pr.toString());
+		}
+		
+	}
+	
+	public void testContem()
+	{
+		System.out.println("contem -----------------------------------------------------------------");
+		ArrayList<Produto> lista = (ArrayList<Produto>) dao.getList(new BigDecimal("159.45"));
+	ArrayList<Produto> list = dao.ContainsProducts(lista);
+	System.out.println("kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+list.size());
+	}
+	
+	public void testNContem()
+	{
+		System.out.println("nao contem -----------------------------------------------------------------");
+		ArrayList<Produto> lista = (ArrayList<Produto>) dao.getList(new BigDecimal("159.45"));
+		Produto produto = new Produto();
+		produto.setNome("Teste");
+		lista.add(produto);
+		Produto produto1 = new Produto();
+		produto1.setNome("Camisa Santos");
+		lista.add(produto1);
+		
+	ArrayList<Produto> list = dao.ContainsProducts(lista);
+	for(Produto p:list)
+	{
+		System.out.println(p.toString());
+	}
+	}
+ 
 }

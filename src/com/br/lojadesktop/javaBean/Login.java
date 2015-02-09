@@ -5,8 +5,6 @@ package com.br.lojadesktop.javaBean;
 
 import javax.persistence.*;
 
-
-
 import com.br.lojadesktop.valid.Valid;
 import com.br.lojadesktop.vendas.javaBean.Cliente;
 
@@ -22,7 +20,7 @@ public class Login {
 	@Id
     @GeneratedValue
 	private int id;
-	@Column
+	@Column(unique = true)
 	private String user;
 	@Column
 	private String senha;

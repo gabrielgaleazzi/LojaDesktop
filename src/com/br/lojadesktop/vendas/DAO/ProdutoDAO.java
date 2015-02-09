@@ -4,6 +4,8 @@
 package com.br.lojadesktop.vendas.DAO;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,15 @@ public class ProdutoDAO {
 		 
 	 }
 	 
+	 private void Update()
+	 {
+		 em.getTransaction().begin();
+		 em.createQuery("Delete from Produto where quantidade = 0").executeUpdate();
+		 em.getTransaction().commit(); 
+	 }
 	 public String newProduto(Produto produto)
 	 {
+		 Update();
 		 em.getTransaction().begin(); 
 		 if(ExisteProduto(produto))
 		 {
@@ -67,6 +76,7 @@ public class ProdutoDAO {
 	 
 	 public int SellProduto(Produto produto)
 	 {
+		 Update();
 		 if(Estoque(produto)){
 		 em.getTransaction().begin(); 
 		 em.createQuery("Update Produto set quantidade = quantidade -1"
@@ -115,22 +125,51 @@ public class ProdutoDAO {
 		 		+ " or tipo like :info3").setParameter("info1", "%"+info+"%").setParameter("info2", "%"+info+"%").setParameter("info3", "%"+info+"%").getResultList();
 	 }
 	 
-	 public Produto getProduto(String info)
+	 public Produto getProduto(Produto produto)
 	 {
-		 return null;
+		 return (Produto) em.createQuery("from Produto where descricao like :descricao and"
+			 		+ " nome like :nome"
+			 		+ " and tipo like :tipo").
+			 		setParameter("descricao", "%"+produto.getDescricao()+"%").
+			 		setParameter("nome", "%"+produto.getNome()+"%").
+			 		setParameter("tipo", "%"+produto.getTipo()+"%").
+			 		getResultList().get(0);
 	 }
 	 
-	 public List<?> getList(Produto produto)
+	 public List<?> getList(BigDecimal produto)
 	 {
-		System.out.println(produto.getValor());
 		 return (List<?>) em.createQuery("from Produto where valor = :valor").
-				 setParameter("valor", produto.getValor()).
+				 setParameter("valor", produto).
 				 getResultList();
-		 
 	 }
 	 
 	 public List<?> getList(BigDecimal de, BigDecimal ate)
 	 {
-		 return null;
+		 return (List<?>) em.createQuery("from Produto where valor between :de and :ate").
+				 setParameter("de", de).
+				 setParameter("ate", ate).
+				 getResultList();
 	 }
+	 
+	 public Produto getProduto(int id)
+	 {
+		return em.getReference(Produto.class, id);
+
+	 }
+	 
+	 public ArrayList<Produto> ContainsProducts(ArrayList<Produto> lista)
+	 {
+		 ArrayList<Produto> list = new ArrayList<Produto>();
+		 for(Produto produto:lista)
+		 {
+			 if(!Estoque(produto))
+				 list.add(produto);
+			
+				 
+		 }
+		 
+		 return list;
+	 }
+	 
+	 
 }

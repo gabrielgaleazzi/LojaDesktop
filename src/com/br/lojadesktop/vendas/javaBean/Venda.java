@@ -3,9 +3,11 @@
  */
 package com.br.lojadesktop.vendas.javaBean;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
+
+
+import java.util.Date;
+
+import javax.persistence.*;
 
 import com.br.lojadesktop.cadastro.javaBean.Produto;
 
@@ -13,9 +15,59 @@ import com.br.lojadesktop.cadastro.javaBean.Produto;
  * @author gabrielgaleazzi
  *
  */
-public class Venda extends Carrinho{
+@Entity 
+public class Venda {
+	@Id
+	@GeneratedValue
+	private int id;
+	public Date getData() {
+		return data;
+	}
 
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	@Enumerated(EnumType.STRING)
+	@Column(name="pagamento")
 	private Pagamento tipo;
+	@ManyToOne
+    @JoinColumn(name = "produto_id")
+	private Produto produto;
+	@ManyToOne
+    @JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	@Column(name="Data")
+	@Temporal(TemporalType.DATE)
+	private Date data;
+	
+	public Venda(Produto produto, Cliente cliente, Pagamento tipo, Date data)
+	{
+		
+		this.tipo=tipo;
+		this.produto=produto;
+		this.cliente=cliente;
+		this.data = data;
+		
+	}
+	
+	public Venda(){}
+	
+	public Produto getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public Pagamento getTipo() {
 		return tipo;
@@ -24,39 +76,19 @@ public class Venda extends Carrinho{
 	public void setTipo(Pagamento tipo) {
 		this.tipo = tipo;
 	}
-
-	public Venda(int id, ArrayList<Produto> produtos, Cliente cliente,
-			BigDecimal valor, Pagamento tipo) {
-		super(id, produtos, cliente, valor);
-		this.tipo = tipo;
+	public int getId() {
+		return id;
 	}
 
-	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
 	public String toString() {
-		return "Venda [tipo=" + tipo + ", getProdutos()=" + getProdutos()
-				+ ", getCliente()=" + getCliente() + ", getValorReal()="
-				+ getValorReal() + ", getValorRealDesconto()=" + getValorRealDesconto() + "]";
+		return "Venda [id=" + id + ", tipo=" + tipo + ", produto=" + produto
+				+ ", cliente=" + cliente + ", data=" + data + "]";
 	}
-
-	public Venda(int id, Carrinho carrinho, Pagamento tipo) {
-		super(id, carrinho.getProdutos(), carrinho.getCliente(), carrinho.getValor());
-		this.tipo = tipo;
-	}
-	
-	public String getValorRealDesconto()  {
-		
-		DecimalFormat df = new DecimalFormat( "#,##0.00" ); 
-		
-		BigDecimal desconto = new BigDecimal(this.tipo.getDesconto());
-		if(desconto.doubleValue() == 0)
-		return "R$ "+df.format(this.getValor());
-		BigDecimal descontofinal = this.getValor().divide(desconto);
-		
-		return "R$ "+df.format(this.getValor().subtract(descontofinal));
-	}
-	
-	
-	
 	
 	
 }
