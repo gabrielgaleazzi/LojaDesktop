@@ -4,6 +4,7 @@
 package com.br.lojadesktop.vendas.javaBean;
 
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -18,7 +19,7 @@ import com.br.lojadesktop.valid.Valid;
 @DiscriminatorValue(value = "CJ")
 public class ClienteJuridico extends Cliente {
 
-	
+	@Column(unique = true)
 	private String cnpj;
 	
 	

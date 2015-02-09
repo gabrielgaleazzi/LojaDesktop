@@ -3,7 +3,7 @@
  */
 package com.br.lojadesktop.vendas.test;
 
-import static org.junit.Assert.*;
+
 
 import com.br.lojadesktop.javaBean.Login;
 import com.br.lojadesktop.vendas.DAO.LoginDAO;

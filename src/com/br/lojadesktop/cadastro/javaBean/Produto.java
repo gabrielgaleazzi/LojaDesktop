@@ -9,17 +9,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
 
 import com.br.lojadesktop.valid.Valid;
+import com.br.lojadesktop.vendas.javaBean.Pagamento;
 /**
  * @author Rafael S. Vieira
  *
  * 
  */
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED) 
 public class Produto {
 	@Id
     @GeneratedValue
@@ -32,6 +31,8 @@ public class Produto {
 	private String descricao;
 	@Column
 	private BigDecimal valor;
+	
+	
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -90,12 +91,7 @@ public class Produto {
 	{
 		return this.valor.doubleValue();
 	}
-	@Override
-	public String toString() {
-		return "Produtos [id=" + id + ", Nome=" + nome
-				+ ", Tipo=" + tipo + ", descricao=" + descricao + ", valor="
-				+ valor + "]";
-	}
+	
 	public void setValor(BigDecimal valor) throws Exception {
 	if(!Valid.validValor(valor))
 		throw new Exception("Valor invalido");
@@ -103,6 +99,13 @@ public class Produto {
 		this.valor = valor;
 	} 
 	
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nome=" + nome + ", tipo=" + tipo
+				+ ", descricao=" + descricao + ", valor=" + valor
+				+ ", quantidade=" + quantidade
+				+ "]";
+	}
 	public Produto(){}
 	
 }

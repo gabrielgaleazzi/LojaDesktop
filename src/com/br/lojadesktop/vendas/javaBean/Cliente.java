@@ -35,9 +35,10 @@ public class Cliente {
 	private String celular;
 	@Column
 	private String telefone;
-
+	
+	
 	@OneToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name="login_id")
+	@JoinColumn(name="login_id" , unique = true)
 	private Login login;
 	
 	public Login getLogin() {

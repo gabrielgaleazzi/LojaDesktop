@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.br.lojadesktop.cadastro.javaBean.Produto;
 import com.br.lojadesktop.javaBean.*;
 
 /**
@@ -49,7 +50,19 @@ public class LoginDAO {
 		 
 		return null;
 	}
+	public int getId(String user)
+	{
+		Login login =  (Login) em.createQuery("from Login where"
+				+ " user = :user").
+		 setParameter("user", user).getResultList().get(0);
+		return login.getId();
+	}
 	
-	
+	public static void main(String args[])
+	{
+		LoginDAO l = new LoginDAO();
+		int id = l.getId("a@a.com");
+		System.out.println(id);
+	}
 	
 }

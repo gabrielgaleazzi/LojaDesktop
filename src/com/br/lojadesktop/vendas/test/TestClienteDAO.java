@@ -243,7 +243,6 @@ public class TestClienteDAO extends TestCase{
 	public void testGetCliente()
 	{
 			try {
-			@SuppressWarnings("unchecked")
 			Cliente cliente = dao.getCliente("41954438818");
 			System.out.println("GETCLIENTE()->"+cliente.toString());
 			cliente = dao.getCliente("27133699000114");
