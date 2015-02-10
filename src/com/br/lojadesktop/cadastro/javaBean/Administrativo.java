@@ -158,6 +158,16 @@ public class Administrativo {
 		this.celular = celular;
 		this.telefone = telefone;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Administrativo [Nome=" + Nome + ", sobrenome=" + sobrenome
+				+ ", CPF=" + CPF + ", RG=" + RG + ", cep=" + cep
+				+ ", complemento=" + complemento + ", celular=" + celular
+				+ ", telefone=" + telefone + "]";
+	}
 
 	
 }

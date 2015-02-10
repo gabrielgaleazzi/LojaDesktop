@@ -4,6 +4,10 @@
 package com.br.lojadesktop.cadastro.DAO;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.logicalcobwebs.proxool.admin.servlet.AdminServlet;
 
 import com.br.lojadesktop.ConexaoBanco.BD;
 import com.br.lojadesktop.cadastro.javaBean.Administrativo;
@@ -103,34 +107,26 @@ public class AdministrativoDAO {
 		bd.execComando(SQL);
 	}
 	
-
-	
-	
-	
-	public void altereFuncionarioNome(Administrativo adm) throws Exception{
-		if(adm.getClass()==Gerente.class)
-			altereGerenteNome((Gerente) adm);
-		else
-			altereVendedorNome((Vendedor) adm);
-	}
-	private void altereGerenteNome(Gerente ger) throws Exception{
-		String SQL="SELECT * FROM loja.Funcionario where nome='"+ger.getNome()+"';";
-		System.out.println(SQL);
-		ResultSet result = bd.execConsulta(SQL);
-		int id=0;
+	public List<?> getList() throws Exception{
+		String SQL="SELECT * FROM loja.Funcionario;";
+		ResultSet result= bd.execConsulta(SQL);
+		ArrayList<Administrativo> lista= new ArrayList<Administrativo>();
+		
 		while(result.next()){
-			id=result.getInt("login_id");
-			System.out.println(id);
+			Administrativo adm= new Administrativo(result.getString("nome"), result.getString("sobrenome"), result.getString("cpf"),result.getString("rg"), result.getString("cep"), result.getString("complemento"), result.getString("celular"), result.getString("telefone"));
+			lista.add(adm);
 		}
+		return lista;
 	}
-	private void altereVendedorNome(Vendedor vend) throws Exception{
-		String SQL="SELECT * FROM loja.Funcionario where nome='"+vend.getNome()+"';";
-		System.out.println(SQL);
-		ResultSet result = bd.execConsulta(SQL);
-		int id=0;
+	public List<?> getList(String nome) throws Exception{
+		String SQL="SELECT * FROM loja.Funcionario where nome='"+nome+"' or sobrenome='"+nome+"';";
+		ResultSet result= bd.execConsulta(SQL);
+		ArrayList<Administrativo> lista= new ArrayList<Administrativo>();
+		
 		while(result.next()){
-			id=result.getInt("login_id");
-			System.out.println(id);
+			Administrativo adm= new Administrativo(result.getString("nome"), result.getString("sobrenome"), result.getString("cpf"),result.getString("rg"), result.getString("cep"), result.getString("complemento"), result.getString("celular"), result.getString("telefone"));
+			lista.add(adm);
 		}
+		return lista;
 	}
 }
